@@ -17,9 +17,17 @@ function Login() {
 
     const validate = () => {
         const errors = {};
-        if (!username.trim()) errors.username = "Enter your username.";
-        if (!password) errors.password = "Enter your password.";
+
+        if (!username.trim()) {
+            errors.username = "Saisissez votre nom d'utilisateur.";
+        }
+
+        if (!password) {
+            errors.password = "Saisissez votre mot de passe.";
+        }
+
         setFieldErrors(errors);
+
         return Object.keys(errors).length === 0;
     };
 
@@ -30,8 +38,12 @@ function Login() {
         if (!validate() || isSubmitting) return;
 
         setIsSubmitting(true);
+
         try {
-            const response = await api.post("login/", { username, password });
+            const response = await api.post("login/", {
+                username,
+                password,
+            });
 
             localStorage.setItem("access", response.data.access);
             localStorage.setItem("refresh", response.data.refresh);
@@ -39,7 +51,10 @@ function Login() {
             navigate("/");
         } catch (error) {
             setFormError(
-                getErrorMessage(error, "Login failed. Check your username and password.")
+                getErrorMessage(
+                    error,
+                    "Échec de la connexion. Vérifiez votre nom d'utilisateur et votre mot de passe."
+                )
             );
         } finally {
             setIsSubmitting(false);
@@ -48,26 +63,26 @@ function Login() {
 
     return (
         <AuthLayout
-            eyebrow="WELCOME BACK"
-            title="Log in to your account"
-            subtitle="Enter your details to access your membership."
+            eyebrow="BON RETOUR"
+            title="Connectez-vous à votre compte"
+            subtitle="Saisissez vos informations pour accéder à votre espace."
         >
             <form onSubmit={handleLogin} noValidate>
                 <FormField
-                    label="Username"
+                    label="Nom d'utilisateur"
                     type="text"
                     autoComplete="username"
-                    placeholder="yourusername"
+                    placeholder="Votre nom d'utilisateur"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     error={fieldErrors.username}
                 />
 
                 <FormField
-                    label="Password"
+                    label="Mot de passe"
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
-                    placeholder="••••••••"
+                    placeholder="Votre mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     error={fieldErrors.password}
@@ -77,7 +92,7 @@ function Login() {
                             className="field__toggle"
                             onClick={() => setShowPassword((v) => !v)}
                         >
-                            {showPassword ? "Hide" : "Show"}
+                            {showPassword ? "Masquer" : "Afficher"}
                         </button>
                     }
                 />
@@ -88,13 +103,18 @@ function Login() {
                     </p>
                 )}
 
-                <button type="submit" className="btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? "Logging in…" : "Log in"}
+                <button
+                    type="submit"
+                    className="btn-primary"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? "Connexion…" : "Se connecter"}
                 </button>
             </form>
 
             <p className="auth-switch">
-                New to Forge Athletics? <Link to="/signup">Create an account</Link>
+                Vous n'avez pas encore de compte ?{" "}
+                <Link to="/signup">Créer un compte</Link>
             </p>
         </AuthLayout>
     );

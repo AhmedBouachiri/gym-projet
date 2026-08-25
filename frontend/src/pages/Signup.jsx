@@ -24,28 +24,35 @@ function Signup() {
         const errors = {};
 
         if (!username.trim()) {
-            errors.username = "Choose a username.";
+            errors.username = "Choisissez un nom d'utilisateur.";
         } else if (username.trim().length < 3) {
-            errors.username = "Username must be at least 3 characters.";
+            errors.username =
+                "Le nom d'utilisateur doit contenir au moins 3 caractères.";
         }
 
         if (!email.trim()) {
-            errors.email = "Enter your email.";
+            errors.email = "Saisissez votre adresse e-mail.";
         } else if (!EMAIL_RE.test(email.trim())) {
-            errors.email = "Enter a valid email address.";
+            errors.email = "Saisissez une adresse e-mail valide.";
         }
 
         if (!password) {
-            errors.password = "Choose a password.";
+            errors.password = "Choisissez un mot de passe.";
         } else if (password.length < 8) {
-            errors.password = "Password must be at least 8 characters.";
+            errors.password =
+                "Le mot de passe doit contenir au moins 8 caractères.";
         }
 
-        if (confirmPassword !== password) {
-            errors.confirmPassword = "Passwords don't match.";
+        if (!confirmPassword) {
+            errors.confirmPassword =
+                "Confirmez votre mot de passe.";
+        } else if (confirmPassword !== password) {
+            errors.confirmPassword =
+                "Les mots de passe ne correspondent pas.";
         }
 
         setFieldErrors(errors);
+
         return Object.keys(errors).length === 0;
     };
 
@@ -56,6 +63,7 @@ function Signup() {
         if (!validate() || isSubmitting) return;
 
         setIsSubmitting(true);
+
         try {
             await api.post("register/", {
                 username: username.trim(),
@@ -66,7 +74,10 @@ function Signup() {
             setIsDone(true);
         } catch (error) {
             setFormError(
-                getErrorMessage(error, "Signup failed. Please check your details.")
+                getErrorMessage(
+                    error,
+                    "Échec de l'inscription. Vérifiez vos informations."
+                )
             );
         } finally {
             setIsSubmitting(false);
@@ -76,12 +87,15 @@ function Signup() {
     if (isDone) {
         return (
             <AuthLayout
-                eyebrow="YOU'RE IN"
-                title="Account created"
-                subtitle="Your Forge Athletics account is ready — log in to get started."
+                eyebrow="INSCRIPTION TERMINÉE"
+                title="Compte créé avec succès"
+                subtitle="Votre compte a été créé. Vous pouvez maintenant vous connecter."
             >
-                <button className="btn-primary" onClick={() => navigate("/login")}>
-                    Continue to login
+                <button
+                    className="btn-primary"
+                    onClick={() => navigate("/login")}
+                >
+                    Continuer vers la connexion
                 </button>
             </AuthLayout>
         );
@@ -89,36 +103,36 @@ function Signup() {
 
     return (
         <AuthLayout
-            eyebrow="GET STARTED"
-            title="Create your account"
-            subtitle="Join Forge Athletics and start training today."
+            eyebrow="BIENVENUE"
+            title="Créez votre compte"
+            subtitle="Créez votre compte pour accéder à votre espace."
         >
             <form onSubmit={handleSignup} noValidate>
                 <FormField
-                    label="Username"
+                    label="Nom d'utilisateur"
                     type="text"
                     autoComplete="username"
-                    placeholder="yourusername"
+                    placeholder="Votre nom d'utilisateur"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     error={fieldErrors.username}
                 />
 
                 <FormField
-                    label="Email"
+                    label="Adresse e-mail"
                     type="email"
                     autoComplete="email"
-                    placeholder="you@example.com"
+                    placeholder="vous@exemple.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     error={fieldErrors.email}
                 />
 
                 <FormField
-                    label="Password"
+                    label="Mot de passe"
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
-                    placeholder="••••••••"
+                    placeholder="Votre mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     error={fieldErrors.password}
@@ -128,19 +142,22 @@ function Signup() {
                             className="field__toggle"
                             onClick={() => setShowPassword((v) => !v)}
                         >
-                            {showPassword ? "Hide" : "Show"}
+                            {showPassword ? "Masquer" : "Afficher"}
                         </button>
                     }
                 />
+
                 {!fieldErrors.password && (
-                    <p className="password-hint">Use at least 8 characters.</p>
+                    <p className="password-hint">
+                        Utilisez au moins 8 caractères.
+                    </p>
                 )}
 
                 <FormField
-                    label="Confirm password"
+                    label="Confirmer le mot de passe"
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
-                    placeholder="••••••••"
+                    placeholder="Confirmez votre mot de passe"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     error={fieldErrors.confirmPassword}
@@ -152,13 +169,20 @@ function Signup() {
                     </p>
                 )}
 
-                <button type="submit" className="btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? "Creating account…" : "Create account"}
+                <button
+                    type="submit"
+                    className="btn-primary"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting
+                        ? "Création du compte…"
+                        : "Créer un compte"}
                 </button>
             </form>
 
             <p className="auth-switch">
-                Already have an account? <Link to="/login">Log in</Link>
+                Vous avez déjà un compte ?{" "}
+                <Link to="/login">Se connecter</Link>
             </p>
         </AuthLayout>
     );
