@@ -1,0 +1,25 @@
+.dashboard {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    padding: 24px;
+}
+
+.dashboard__card {
+    max-width: 420px;
+    text-align: left;
+}
+
+.dashboard__title {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.dashboard__body {
+    color: var(--smoke);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
