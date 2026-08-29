@@ -1,0 +1,80 @@
+.field {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.field__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--smoke);
+    margin-bottom: 7px;
+}
+
+.field__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--steel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field__control:focus-within {
+    border-color: var(--ember);
+    box-shadow: 0 0 0 3px var(--ember-dim);
+}
+
+.field__control--error {
+    border-color: var(--danger);
+}
+
+.field__control--error:focus-within {
+    box-shadow: 0 0 0 3px var(--danger-bg);
+}
+
+.field__input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: var(--chalk);
+    font-family: var(--sans);
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+}
+
+.field__input::placeholder {
+    color: var(--smoke-dim);
+}
+
+.field__input:-webkit-autofill {
+    -webkit-text-fill-color: var(--chalk);
+    -webkit-box-shadow: 0 0 0 1000px var(--steel) inset;
+    caret-color: var(--chalk);
+}
+
+.field__error {
+    font-size: 13px;
+    color: var(--danger);
+    margin-top: 6px;
+}
+
+.field__toggle {
+    background: none;
+    border: none;
+    color: var(--smoke);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 0 14px;
+    cursor: pointer;
+}
+
+.field__toggle:hover {
+    color: var(--chalk);
+}
