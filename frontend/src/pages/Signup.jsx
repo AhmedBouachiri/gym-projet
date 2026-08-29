@@ -65,7 +65,7 @@ function Signup() {
         setIsSubmitting(true);
 
         try {
-            await api.post("register/", {
+            await api.post("auth/register/", {
                 username: username.trim(),
                 email: email.trim(),
                 password,

@@ -58,7 +58,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    'accounts', 
+    'accounts',
+    'members',
+    'employees',
 ]
 
 MIDDLEWARE = [
@@ -158,4 +160,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = "accounts.User"
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
