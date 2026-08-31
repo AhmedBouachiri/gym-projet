@@ -1,0 +1,81 @@
+:root {
+  /* Ink & steel */
+  --ink: #0b0c0f;
+  --charcoal: #16171c;
+  --steel: #1e2026;
+  --steel-light: #26282f;
+  --line: #2d2f37;
+
+  /* Text */
+  --chalk: #f4f2ec;
+  --smoke: #9698a3;
+  --smoke-dim: #6c6e78;
+
+  /* Accent: ember orange (primary), volt (rare highlight) */
+  --ember: #ff4d23;
+  --ember-hover: #ff6a45;
+  --ember-dim: rgba(255, 77, 35, 0.14);
+  --volt: #d7ff3f;
+
+  --danger: #ff6b6b;
+  --danger-bg: rgba(255, 107, 107, 0.12);
+  --success: #6ee7a0;
+
+  --display: 'Anton', 'Arial Narrow', sans-serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  color-scheme: dark;
+  color: var(--chalk);
+  background: var(--ink);
+  font: 16px/1.5 var(--sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--ink);
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--chalk);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: var(--sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

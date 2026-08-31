@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'accounts',
+    'members',
+    'employees',
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = "accounts.User"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
